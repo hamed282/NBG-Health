@@ -1,12 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-# from course.models import CourseCategoryModel, CourseSubCategoryModel, CourseModel, SampleExerciseModel
-# from blog.models import BlogModel
-from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel
-# from course.serializers import CourseCategorySerializer, CourseSubCategorySerializer, CourseSerializer,\
-#     SampleExerciseSerializer
-from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer
-# from blog.serializers import BlogSerializer
+from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel, TeamPersonModel,\
+    TeamValuesContentModel
+from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer, TeamPersonSerializer,\
+    TeamContentSerializer, TeamValuesContentSerializer
 
 
 class HomeHeaderView(APIView):
@@ -34,3 +31,19 @@ class HomeContentView(APIView):
         ser_home_content = HomeContentSerializer(instance=home_content, many=True)
 
         return Response(data={'home_content': ser_home_content.data})
+
+
+class TeamContentView(APIView):
+
+    def get(self, request):
+        team_content = TeamContentModel.objects.all()
+        ser_team_content = TeamContentSerializer(instance=team_content, many=True)
+
+        team_person = TeamPersonModel.objects.all()
+        ser_team_person = TeamPersonSerializer(instance=team_person, many=True)
+
+        team_values = TeamValuesContentModel.objects.all()
+        ser_team_values = TeamValuesContentSerializer(instance=team_values, many=True)
+
+        return Response(data={'team_content': ser_team_content.data, 'team_person': ser_team_person.data,
+                              'team_values': ser_team_values.data})

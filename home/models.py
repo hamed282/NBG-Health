@@ -26,8 +26,22 @@ class HomeContentModel(models.Model):
     study_video = models.FileField(upload_to='video/content/')
 
 
+class TeamPersonModel(models.Model):
+    person_name = models.CharField(max_length=255)
+    person_image = models.ImageField(upload_to='images/team_person/')
+    title = models.CharField(max_length=255)
+    header = models.CharField(max_length=255)
 
 
+class TeamContentModel(models.Model):
+    mission_description = models.CharField(max_length=2040)
+    vision_description = models.CharField(max_length=2040)
 
 
+class TeamValuesModel(models.Model):
+    values_title = models.CharField(max_length=2040)
 
+
+class TeamValuesContentModel(models.Model):
+    values_title = models.ForeignKey(TeamValuesModel, on_delete=models.CASCADE, related_name='team_values')
+    values_description = models.CharField(max_length=2040)
