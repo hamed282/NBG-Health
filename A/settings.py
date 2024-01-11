@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'news.apps.NewsConfig',
+    'gallery.apps.GalleryConfig',
 ]
 
 MIDDLEWARE = [
