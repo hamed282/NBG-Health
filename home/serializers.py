@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamPersonModel, TeamContentModel,\
-    TeamValuesContentModel
+    TeamValuesContentModel, MoreLandingModel
 
 
 class HomeHeaderSerializer(serializers.ModelSerializer):
@@ -47,4 +47,10 @@ class TeamValuesContentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = TeamValuesContentModel
+        fields = '__all__'
+
+
+class MoreLandingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MoreLandingModel
         fields = '__all__'

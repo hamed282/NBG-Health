@@ -8,4 +8,5 @@ urlpatterns = [
     path('home_footer/', views.HomeFooterView.as_view(), name='home_footer'),
     path('home_content/', views.HomeContentView.as_view(), name='home_content'),
     path('team_content/', views.TeamContentView.as_view(), name='team_content'),
+    path('more_landing/', views.MoreLandingView.as_view(), name='more_landing'),
 ]

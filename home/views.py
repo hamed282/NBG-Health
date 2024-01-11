@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel, TeamPersonModel,\
-    TeamValuesContentModel
+    TeamValuesContentModel, MoreLandingModel
 from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer, TeamPersonSerializer,\
-    TeamContentSerializer, TeamValuesContentSerializer
+    TeamContentSerializer, TeamValuesContentSerializer, MoreLandingSerializer
 
 
 class HomeHeaderView(APIView):
@@ -47,3 +47,11 @@ class TeamContentView(APIView):
 
         return Response(data={'team_content': ser_team_content.data, 'team_person': ser_team_person.data,
                               'team_values': ser_team_values.data})
+
+
+class MoreLandingView(APIView):
+    def get(self, request):
+        more_landing = MoreLandingModel.objects.all()
+        ser_more_landing = MoreLandingSerializer(instance=more_landing, many=True)
+
+        return Response(data={'more_landing': ser_more_landing.data})

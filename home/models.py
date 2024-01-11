@@ -45,3 +45,13 @@ class TeamValuesModel(models.Model):
 class TeamValuesContentModel(models.Model):
     values_title = models.ForeignKey(TeamValuesModel, on_delete=models.CASCADE, related_name='team_values')
     values_description = models.CharField(max_length=2040)
+
+
+class MoreLandingModel(models.Model):
+    image = models.ImageField(upload_to='images/more_landing/')
+    name = models.CharField(max_length=255)
+    academic_title = models.CharField(max_length=255)
+    executive_title = models.CharField(max_length=255)
+    study_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=2040)
+    description = models.CharField(max_length=8040)
