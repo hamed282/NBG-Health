@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'news.apps.NewsConfig',
     'gallery.apps.GalleryConfig',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -121,4 +122,16 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-Test=1
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'NBG-Health API',
+    'DESCRIPTION': 'project description',
+    'VERSION': '1.0.0',
+
+}
+

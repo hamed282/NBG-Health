@@ -36,6 +36,8 @@ class HomeContentView(APIView):
 class TeamContentView(APIView):
 
     def get(self, request):
+
+        # serializer_class = TeamPersonSerializer
         team_content = TeamContentModel.objects.all()
         ser_team_content = TeamContentSerializer(instance=team_content, many=True)
 
