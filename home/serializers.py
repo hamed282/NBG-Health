@@ -34,20 +34,20 @@ class HomeContentSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = TeamPersonModel
 #         fields = '__all__'
-class TeamCategorySerializer(serializers.ModelSerializer):
-    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
-
-    header_category = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = TeamCategoryModel
-        fields = ['header', 'header_category']
-
 
 class TeamCategoryMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeamCategoryMemberModel
         fields = ['title', 'name', 'image']
+
+
+class TeamCategorySerializer(serializers.ModelSerializer):
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    team_category = TeamCategoryMemberSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = TeamCategoryModel
+        fields = ['header', 'team_category']
 
 
 class TeamContentSerializer(serializers.ModelSerializer):

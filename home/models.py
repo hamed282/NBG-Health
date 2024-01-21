@@ -37,7 +37,7 @@ class TeamCategoryModel(models.Model):
 
 
 class TeamCategoryMemberModel(models.Model):
-    header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='header_category')
+    header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='team_category')
     title = models.CharField(max_length=2040)
     name = models.CharField(max_length=2040)
     image = models.ImageField(upload_to='images/team_person/')

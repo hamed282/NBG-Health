@@ -44,6 +44,8 @@ class TeamContentView(APIView):
         team_category = TeamCategoryModel.objects.all()
         ser_team_category = TeamCategorySerializer(instance=team_category, many=True)
 
+
+
         team_values = TeamValuesModel.objects.all()
         ser_team_values = TeamValuesSerializer(instance=team_values, many=True)
         # list_values = {}
