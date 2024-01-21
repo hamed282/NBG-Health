@@ -1,9 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
-    TeamValuesContentModel, MoreLandingModel, TeamValuesModel, TeamCategoryModel
+    TeamValuesContentModel, MoreLandingModel, TeamValuesModel, TeamCategoryModel, PaperDateModel
+
 from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer,\
-    TeamContentSerializer, TeamValuesSerializer, MoreLandingSerializer, TeamCategorySerializer
+    TeamContentSerializer, TeamValuesSerializer, MoreLandingSerializer, TeamCategorySerializer,\
+    PaperDateSerializer
 
 
 class HomeHeaderView(APIView):
@@ -44,15 +46,12 @@ class TeamContentView(APIView):
         team_category = TeamCategoryModel.objects.all()
         ser_team_category = TeamCategorySerializer(instance=team_category, many=True)
 
-
-
         team_values = TeamValuesModel.objects.all()
         ser_team_values = TeamValuesSerializer(instance=team_values, many=True)
         # list_values = {}
         # print(ser_team_values.data)
         return Response(data={'team_content': ser_team_content.data, 'team_person': ser_team_category.data,
                               'our_values': ser_team_values.data})
-        # return Response(data=ser_team_values.data)
 
 
 class MoreLandingView(APIView):
@@ -61,3 +60,11 @@ class MoreLandingView(APIView):
         ser_more_landing = MoreLandingSerializer(instance=more_landing, many=True)
 
         return Response(data={'more_landing': ser_more_landing.data})
+
+
+class PaperPdfView(APIView):
+    def get(self, request):
+        paper_pdf = PaperDateModel.objects.all()
+        ser_paper_pdf = PaperDateSerializer(instance=paper_pdf, many=True)
+
+        return Response(data=ser_paper_pdf.data)

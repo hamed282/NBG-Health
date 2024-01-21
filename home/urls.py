@@ -9,4 +9,5 @@ urlpatterns = [
     path('home_content/', views.HomeContentView.as_view(), name='home_content'),
     path('team_content/', views.TeamContentView.as_view(), name='team_content'),
     path('more_landing/', views.MoreLandingView.as_view(), name='more_landing'),
+    path('paper_pdf/', views.PaperPdfView.as_view(), name='paper_pdf'),
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
-    TeamValuesContentModel, MoreLandingModel, TeamValuesModel, TeamCategoryModel, TeamCategoryMemberModel,\
-    TeamCategoryModel
+    MoreLandingModel, TeamValuesModel, TeamCategoryModel, TeamCategoryMemberModel, PaperCategoryModel, PaperPdfModel,\
+    PaperDateModel
 
 
 class HomeHeaderSerializer(serializers.ModelSerializer):
@@ -35,20 +35,6 @@ class HomeContentSerializer(serializers.ModelSerializer):
 #         model = TeamPersonModel
 #         fields = '__all__'
 
-class TeamCategoryMemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TeamCategoryMemberModel
-        fields = ['title', 'name', 'image']
-
-
-class TeamCategorySerializer(serializers.ModelSerializer):
-    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
-    team_category = TeamCategoryMemberSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = TeamCategoryModel
-        fields = ['header', 'team_category']
-
 
 class TeamContentSerializer(serializers.ModelSerializer):
 
@@ -70,3 +56,29 @@ class MoreLandingSerializer(serializers.ModelSerializer):
     class Meta:
         model = MoreLandingModel
         fields = '__all__'
+
+
+class TeamCategoryMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamCategoryMemberModel
+        fields = ['title', 'name', 'image']
+class TeamCategorySerializer(serializers.ModelSerializer):
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+    team_category = TeamCategoryMemberSerializer(many=True, read_only=True)
+    class Meta:
+        model = TeamCategoryModel
+        fields = ['header', 'team_category']
+class PaperPdfSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaperPdfModel
+        fields = ['title', 'pdf_file']
+class PaperCategorySerializer(serializers.ModelSerializer):
+    paper_category = PaperPdfSerializer(many=True, read_only=True)
+    class Meta:
+        model = PaperCategoryModel
+        fields = ['category', 'paper_category']
+class PaperDateSerializer(serializers.ModelSerializer):
+    date_paper = PaperCategorySerializer(many=True, read_only=True)
+    class Meta:
+        model = PaperDateModel
+        fields = ['date', 'date_paper']

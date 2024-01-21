@@ -32,19 +32,6 @@ class HomeContentModel(models.Model):
 #     title = models.CharField(max_length=255)
 #     header = models.CharField(max_length=255)
 
-class TeamCategoryModel(models.Model):
-    header = models.CharField(max_length=2040)
-
-
-class TeamCategoryMemberModel(models.Model):
-    header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='team_category')
-    title = models.CharField(max_length=2040)
-    name = models.CharField(max_length=2040)
-    image = models.ImageField(upload_to='images/team_person/')
-
-    def __str__(self):
-        return self.name
-
 
 class TeamContentModel(models.Model):
     mission_description = models.CharField(max_length=2040)
@@ -71,3 +58,27 @@ class MoreLandingModel(models.Model):
     study_title = models.CharField(max_length=255)
     title = models.CharField(max_length=2040)
     description = models.CharField(max_length=8040)
+
+
+class TeamCategoryModel(models.Model):
+    header = models.CharField(max_length=2040)
+class TeamCategoryMemberModel(models.Model):
+    header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='team_category')
+    title = models.CharField(max_length=2040)
+    name = models.CharField(max_length=2040)
+    image = models.ImageField(upload_to='images/team_person/')
+    def __str__(self):
+        return self.name
+class PaperDateModel(models.Model):
+    date = models.CharField(max_length=255)
+class PaperCategoryModel(models.Model):
+    date = models.ForeignKey(PaperDateModel, on_delete=models.CASCADE, related_name='date_paper')
+    category = models.CharField(max_length=255)
+class PaperPdfModel(models.Model):
+    category = models.ForeignKey(PaperCategoryModel, on_delete=models.CASCADE, related_name='paper_category')
+    title = models.CharField(max_length=255)
+    pdf_file = models.FileField(upload_to=f'pdf/')
+    def __str__(self):
+        return self.title
+
+#{category.date}/{category.category}/
