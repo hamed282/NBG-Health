@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamPersonModel, TeamContentModel,\
-    TeamValuesContentModel, MoreLandingModel
+from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
+    TeamValuesContentModel, MoreLandingModel, TeamValuesModel, TeamCategoryModel, TeamCategoryMemberModel,\
+    TeamCategoryModel
 
 
 class HomeHeaderSerializer(serializers.ModelSerializer):
@@ -27,12 +28,26 @@ class HomeContentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TeamPersonSerializer(serializers.ModelSerializer):
-    category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+# class TeamPersonSerializer(serializers.ModelSerializer):
+#     category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+#
+#     class Meta:
+#         model = TeamPersonModel
+#         fields = '__all__'
+class TeamCategorySerializer(serializers.ModelSerializer):
+    # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
+
+    header_category = serializers.StringRelatedField(many=True)
 
     class Meta:
-        model = TeamPersonModel
-        fields = '__all__'
+        model = TeamCategoryModel
+        fields = ['header', 'header_category']
+
+
+class TeamCategoryMemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TeamCategoryMemberModel
+        fields = ['title', 'name', 'image']
 
 
 class TeamContentSerializer(serializers.ModelSerializer):
@@ -42,12 +57,13 @@ class TeamContentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TeamValuesContentSerializer(serializers.ModelSerializer):
-    values_title = serializers.SlugRelatedField(read_only=True, slug_field='values_title')
+class TeamValuesSerializer(serializers.ModelSerializer):
+    # team_values = serializers.SlugRelatedField(read_only=True, slug_field='values_description')
+    list_values = serializers.StringRelatedField(many=True)
 
     class Meta:
-        model = TeamValuesContentModel
-        fields = '__all__'
+        model = TeamValuesModel
+        fields = ['values_title', 'list_values']
 
 
 class MoreLandingSerializer(serializers.ModelSerializer):

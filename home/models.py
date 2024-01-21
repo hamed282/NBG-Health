@@ -26,11 +26,24 @@ class HomeContentModel(models.Model):
     study_video = models.FileField(upload_to='video/content/')
 
 
-class TeamPersonModel(models.Model):
-    person_name = models.CharField(max_length=255)
-    person_image = models.ImageField(upload_to='images/team_person/')
-    title = models.CharField(max_length=255)
-    header = models.CharField(max_length=255)
+# class TeamPersonModel(models.Model):
+#     person_name = models.CharField(max_length=255)
+#     person_image = models.ImageField(upload_to='images/team_person/')
+#     title = models.CharField(max_length=255)
+#     header = models.CharField(max_length=255)
+
+class TeamCategoryModel(models.Model):
+    header = models.CharField(max_length=2040)
+
+
+class TeamCategoryMemberModel(models.Model):
+    header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='header_category')
+    title = models.CharField(max_length=2040)
+    name = models.CharField(max_length=2040)
+    image = models.ImageField(upload_to='images/team_person/')
+
+    def __str__(self):
+        return self.name
 
 
 class TeamContentModel(models.Model):
@@ -43,8 +56,11 @@ class TeamValuesModel(models.Model):
 
 
 class TeamValuesContentModel(models.Model):
-    values_title = models.ForeignKey(TeamValuesModel, on_delete=models.CASCADE, related_name='team_values')
+    values_title = models.ForeignKey(TeamValuesModel, on_delete=models.CASCADE, related_name='list_values')
     values_description = models.CharField(max_length=2040)
+
+    def __str__(self):
+        return self.values_description
 
 
 class MoreLandingModel(models.Model):
