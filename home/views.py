@@ -1,12 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
-    TeamValuesContentModel, MoreLandingModel, TeamValuesModel, TeamCategoryModel, PaperDateModel
-
+    MoreLandingModel, TeamValuesModel, TeamCategoryModel, PaperDateModel, PaperPdfModel, PaperCategoryModel
 from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer,\
     TeamContentSerializer, TeamValuesSerializer, MoreLandingSerializer, TeamCategorySerializer,\
-    PaperDateSerializer
-
+    PaperDateSerializer, PaperPdfSerializer, PaperCategorySerializer
+from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 class HomeHeaderView(APIView):
 
@@ -68,3 +69,40 @@ class PaperPdfView(APIView):
         ser_paper_pdf = PaperDateSerializer(instance=paper_pdf, many=True)
 
         return Response(data=ser_paper_pdf.data)
+
+
+# class PdfFilter(filter.FilterSet):
+#     title = filter.CharFilter(field_name='date', lookup_expr='iexact')
+
+
+class SearchPdfTitleView(viewsets.ModelViewSet):
+    queryset = PaperPdfModel.objects.all()
+    serializer_class = PaperPdfSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = ['date']
+    # filterset_class = PdfFilter
+    search_fields = ['title']
+    # search_fields = ['date', 'date_paper__paper_category__title']
+    ordering_fields = '__all__'
+
+
+class SearchPdfCategoryView(viewsets.ModelViewSet):
+    queryset = PaperCategoryModel.objects.all()
+    serializer_class = PaperCategorySerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = ['date']
+    # filterset_class = PdfFilter
+    search_fields = ['category']
+    # search_fields = ['date', 'date_paper__paper_category__title']
+    ordering_fields = '__all__'
+
+
+class SearchPdfDateView(viewsets.ModelViewSet):
+    queryset = PaperDateModel.objects.all()
+    serializer_class = PaperDateSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = ['date']
+    # filterset_class = PdfFilter
+    search_fields = ['date']
+    # search_fields = ['date', 'date_paper__paper_category__title']
+    ordering_fields = '__all__'
