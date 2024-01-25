@@ -4,6 +4,18 @@ from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamCont
     PaperPdfModel
 
 
+class PaperDateAdmin(admin.ModelAdmin):
+    list_display = ['date']
+
+
+class PaperCategoryAdmin(admin.ModelAdmin):
+    list_display = ['category']
+
+
+class PaperPdfAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
 admin.site.register(HomeHeaderModel)
 admin.site.register(HomeFooterModel)
 admin.site.register(HomeContentModel)
@@ -13,6 +25,10 @@ admin.site.register(TeamCategoryModel)
 admin.site.register(TeamCategoryMemberModel)
 admin.site.register(TeamValuesModel)
 admin.site.register(MoreLandingModel)
-admin.site.register(PaperCategoryModel)
-admin.site.register(PaperDateModel)
-admin.site.register(PaperPdfModel)
+admin.site.register(PaperDateModel, PaperDateAdmin)
+admin.site.register(PaperCategoryModel, PaperCategoryAdmin)
+admin.site.register(PaperPdfModel, PaperPdfAdmin)
+
+
+
+
