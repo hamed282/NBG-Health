@@ -9,7 +9,7 @@ class PaperDateAdmin(admin.ModelAdmin):
 
 
 class PaperCategoryAdmin(admin.ModelAdmin):
-    list_display = ['category']
+    list_display = ['category', 'date']
 
 
 class PaperPdfAdmin(admin.ModelAdmin):

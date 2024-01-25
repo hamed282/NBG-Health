@@ -71,9 +71,13 @@ class TeamCategoryMemberModel(models.Model):
         return self.name
 class PaperDateModel(models.Model):
     date = models.CharField(max_length=255)
+    def __str__(self):
+        return self.date
 class PaperCategoryModel(models.Model):
     date = models.ForeignKey(PaperDateModel, on_delete=models.CASCADE, related_name='date_paper')
     category = models.CharField(max_length=255)
+    def __str__(self):
+        return f'{self.category} - {self.date}'
 class PaperPdfModel(models.Model):
     category = models.ForeignKey(PaperCategoryModel, on_delete=models.CASCADE, related_name='paper_category')
     title = models.CharField(max_length=255)

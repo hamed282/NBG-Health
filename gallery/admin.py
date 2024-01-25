@@ -2,7 +2,18 @@ from django.contrib import admin
 from .models import GalleryImageSlideModel, GalleryVideoSlideModel, GalleryContentModel
 
 
-admin.site.register(GalleryImageSlideModel)
-admin.site.register(GalleryVideoSlideModel)
-admin.site.register(GalleryContentModel)
+class GalleryVideoSlideAdmin(admin.ModelAdmin):
+    list_display = ['title']
 
+
+class GalleryImageSlideAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
+class GalleryContentAdmin(admin.ModelAdmin):
+    list_display = ['title']
+
+
+admin.site.register(GalleryImageSlideModel, GalleryImageSlideAdmin)
+admin.site.register(GalleryContentModel, GalleryContentAdmin)
+admin.site.register(GalleryVideoSlideModel, GalleryVideoSlideAdmin)
