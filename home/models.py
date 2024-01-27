@@ -3,10 +3,14 @@ from django.db import models
 
 class HomeHeaderModel(models.Model):
     logo_header = models.ImageField(upload_to='images/header/')
+    def __str__(self):
+        return f'Home Header'
 
 
 class HomeFooterModel(models.Model):
     logo_footer = models.ImageField(upload_to='images/footer/')
+    def __str__(self):
+        return f'Home Footer'
 
 
 class HomeContentModel(models.Model):
@@ -25,6 +29,8 @@ class HomeContentModel(models.Model):
     study_forward_image = models.ImageField(upload_to='images/content/')
     study_video = models.FileField(upload_to='video/content/')
 
+    def __str__(self):
+        return f'Home content'
 
 # class TeamPersonModel(models.Model):
 #     person_name = models.CharField(max_length=255)
@@ -36,10 +42,13 @@ class HomeContentModel(models.Model):
 class TeamContentModel(models.Model):
     mission_description = models.CharField(max_length=2040)
     vision_description = models.CharField(max_length=2040)
-
+    def __str__(self):
+        return f'Team content'
 
 class TeamValuesModel(models.Model):
     values_title = models.CharField(max_length=2040)
+    def __str__(self):
+        return f'{self.values_title}'
 
 
 class TeamValuesContentModel(models.Model):
@@ -58,17 +67,20 @@ class MoreLandingModel(models.Model):
     study_title = models.CharField(max_length=255)
     title = models.CharField(max_length=2040)
     description = models.CharField(max_length=8040)
-
+    def __str__(self):
+        return f'More Landing'
 
 class TeamCategoryModel(models.Model):
     header = models.CharField(max_length=2040)
+    def __str__(self):
+        return f'{self.header}'
 class TeamCategoryMemberModel(models.Model):
     header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='team_category')
     title = models.CharField(max_length=2040)
     name = models.CharField(max_length=2040)
     image = models.ImageField(upload_to='images/team_person/')
     def __str__(self):
-        return self.name
+        return f'{self.header} - {self.title}'
 class PaperDateModel(models.Model):
     date = models.CharField(max_length=255)
     def __str__(self):
