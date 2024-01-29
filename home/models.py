@@ -72,6 +72,7 @@ class MoreLandingModel(models.Model):
 
 class TeamCategoryModel(models.Model):
     header = models.CharField(max_length=2040)
+    priority = models.IntegerField(default=1)
     def __str__(self):
         return f'{self.header}'
 class TeamCategoryMemberModel(models.Model):

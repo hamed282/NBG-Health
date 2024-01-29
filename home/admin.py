@@ -16,12 +16,16 @@ class PaperPdfAdmin(admin.ModelAdmin):
     list_display = ['title']
 
 
+class TeamCategoryAdmin(admin.ModelAdmin):
+    list_display = ['header', 'priority']
+
+
 admin.site.register(HomeHeaderModel)
 admin.site.register(HomeFooterModel)
 admin.site.register(HomeContentModel)
 admin.site.register(TeamContentModel)
 admin.site.register(TeamValuesContentModel)
-admin.site.register(TeamCategoryModel)
+admin.site.register(TeamCategoryModel, TeamCategoryAdmin)
 admin.site.register(TeamCategoryMemberModel)
 admin.site.register(TeamValuesModel)
 admin.site.register(MoreLandingModel)
