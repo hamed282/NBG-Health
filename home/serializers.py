@@ -100,3 +100,9 @@ class ConnectedSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConnectedModel
         fields = ['first_name', 'last_name', 'hospital', 'specialty', 'email']
+
+
+class EmailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConnectedModel
+        fields = ['email']

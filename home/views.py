@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
-    MoreLandingModel, TeamValuesModel, TeamCategoryModel, PaperDateModel, PaperPdfModel, PaperCategoryModel, ConnectedModel
+    MoreLandingModel, TeamValuesModel, TeamCategoryModel, PaperDateModel, PaperPdfModel, PaperCategoryModel,\
+    ConnectedModel, EmailModel
 from .serializers import HomeHeaderSerializer, HomeFooterSerializer, HomeContentSerializer,\
     TeamContentSerializer, TeamValuesSerializer, MoreLandingSerializer, TeamCategorySerializer,\
-    PaperDateSerializer, PaperPdfSerializer, PaperCategorySerializer, ConnectedSerializer
+    PaperDateSerializer, PaperPdfSerializer, PaperCategorySerializer, ConnectedSerializer, EmailSerializer
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
@@ -114,10 +115,19 @@ class ConnectedView(APIView):
         form = request.data
         ser_data = ConnectedSerializer(data=form)
         if ser_data.is_valid():
-            print('-----------------------------------------------------')
             ConnectedModel.objects.create(first_name=ser_data.validated_data['first_name'],
                                           last_name=ser_data.validated_data['last_name'],
                                           hospital=ser_data.validated_data['hospital'],
                                           specialty=ser_data.validated_data['specialty'],
                                           email=ser_data.validated_data['email'],)
-        return Response(data='successful')
+        return Response(data='successfully')
+
+
+class EmailView(APIView):
+    def post(self, request):
+        form = request.data
+        ser_data = EmailSerializer(data=form)
+        if ser_data.is_valid():
+            EmailModel.objects.create(email=ser_data.validated_data['email'])
+
+        return Response(data='Successfully')

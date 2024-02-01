@@ -34,6 +34,7 @@ class HomeContentModel(models.Model):
     def __str__(self):
         return f'Home content'
 
+
 # class TeamPersonModel(models.Model):
 #     person_name = models.CharField(max_length=255)
 #     person_image = models.ImageField(upload_to='images/team_person/')
@@ -129,3 +130,9 @@ class ConnectedModel(models.Model):
     def __str__(self):
         return self.email
 
+
+class EmailModel(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email

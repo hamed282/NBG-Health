@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel, TeamValuesContentModel,\
     TeamCategoryModel, TeamValuesModel, MoreLandingModel, TeamCategoryMemberModel, PaperCategoryModel, PaperDateModel,\
-    PaperPdfModel, ConnectedModel
+    PaperPdfModel, ConnectedModel, EmailModel
 
 
 class PaperDateAdmin(admin.ModelAdmin):
@@ -24,6 +24,10 @@ class ConnectedAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'hospital', 'specialty', 'email']
 
 
+class EmailAdmin(admin.ModelAdmin):
+    list_display = ['email']
+
+
 admin.site.register(HomeHeaderModel)
 admin.site.register(HomeFooterModel)
 admin.site.register(HomeContentModel)
@@ -37,3 +41,4 @@ admin.site.register(PaperDateModel, PaperDateAdmin)
 admin.site.register(PaperCategoryModel, PaperCategoryAdmin)
 admin.site.register(PaperPdfModel, PaperPdfAdmin)
 admin.site.register(ConnectedModel, ConnectedAdmin)
+admin.site.register(EmailModel, EmailAdmin)
