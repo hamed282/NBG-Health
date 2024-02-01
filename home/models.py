@@ -3,12 +3,14 @@ from django.db import models
 
 class HomeHeaderModel(models.Model):
     logo_header = models.ImageField(upload_to='images/header/')
+
     def __str__(self):
         return f'Home Header'
 
 
 class HomeFooterModel(models.Model):
     logo_footer = models.ImageField(upload_to='images/footer/')
+
     def __str__(self):
         return f'Home Footer'
 
@@ -42,11 +44,14 @@ class HomeContentModel(models.Model):
 class TeamContentModel(models.Model):
     mission_description = models.CharField(max_length=2040)
     vision_description = models.CharField(max_length=2040)
+
     def __str__(self):
         return f'Team content'
 
+
 class TeamValuesModel(models.Model):
     values_title = models.CharField(max_length=2040)
+
     def __str__(self):
         return f'{self.values_title}'
 
@@ -67,35 +72,60 @@ class MoreLandingModel(models.Model):
     study_title = models.CharField(max_length=255)
     title = models.CharField(max_length=2040)
     description = models.CharField(max_length=8040)
+
     def __str__(self):
         return f'More Landing'
 
+
 class TeamCategoryModel(models.Model):
     header = models.CharField(max_length=2040)
-    priority = models.IntegerField(max_length=100)
+    priority = models.IntegerField()
+
     def __str__(self):
         return f'{self.header}'
+
+
 class TeamCategoryMemberModel(models.Model):
     header = models.ForeignKey(TeamCategoryModel, on_delete=models.CASCADE, related_name='team_category')
     title = models.CharField(max_length=2040)
     name = models.CharField(max_length=2040)
     image = models.ImageField(upload_to='images/team_person/')
+
     def __str__(self):
         return f'{self.header} - {self.title}'
+
+
 class PaperDateModel(models.Model):
     date = models.CharField(max_length=255)
+
     def __str__(self):
         return self.date
+
+
 class PaperCategoryModel(models.Model):
     date = models.ForeignKey(PaperDateModel, on_delete=models.CASCADE, related_name='date_paper')
     category = models.CharField(max_length=255)
+
     def __str__(self):
         return f'{self.category} - {self.date}'
+
+
 class PaperPdfModel(models.Model):
     category = models.ForeignKey(PaperCategoryModel, on_delete=models.CASCADE, related_name='paper_category')
     title = models.CharField(max_length=255)
     pdf_file = models.FileField(upload_to=f'pdf/')
+
     def __str__(self):
         return self.title
 
-#{category.date}/{category.category}/
+
+class ConnectedModel(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    hospital = models.CharField(max_length=255)
+    specialty = models.CharField(max_length=255)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email
+

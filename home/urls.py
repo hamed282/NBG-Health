@@ -10,6 +10,7 @@ urlpatterns = [
     path('team_content/', views.TeamContentView.as_view(), name='team_content'),
     path('more_landing/', views.MoreLandingView.as_view(), name='more_landing'),
     path('paper_pdf/', views.PaperPdfView.as_view(), name='paper_pdf'),
+    path('connected/', views.ConnectedView.as_view(), name='connected'),
     path('search_title/', views.SearchPdfTitleView.as_view({'get': 'list'}), name='search_title'),
     path('search_category/', views.SearchPdfCategoryView.as_view({'get': 'list'}), name='search_category'),
     path('search_date/', views.SearchPdfDateView.as_view({'get': 'list'}), name='search_date'),

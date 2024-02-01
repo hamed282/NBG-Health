@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import HomeHeaderModel, HomeFooterModel, HomeContentModel, TeamContentModel,\
     MoreLandingModel, TeamValuesModel, TeamCategoryModel, TeamCategoryMemberModel, PaperCategoryModel, PaperPdfModel,\
-    PaperDateModel
+    PaperDateModel, ConnectedModel
 
 
 class HomeHeaderSerializer(serializers.ModelSerializer):
@@ -62,23 +62,41 @@ class TeamCategoryMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = TeamCategoryMemberModel
         fields = ['title', 'name', 'image']
+
+
 class TeamCategorySerializer(serializers.ModelSerializer):
     # category = serializers.SlugRelatedField(read_only=True, slug_field='slug')
     team_category = TeamCategoryMemberSerializer(many=True, read_only=True)
+
     class Meta:
         model = TeamCategoryModel
         fields = ['header', 'team_category']
+
+
 class PaperPdfSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = PaperPdfModel
         fields = ['title', 'pdf_file']
+
+
 class PaperCategorySerializer(serializers.ModelSerializer):
     paper_category = PaperPdfSerializer(many=True, read_only=True)
+
     class Meta:
         model = PaperCategoryModel
         fields = ['category', 'paper_category']
+
+
 class PaperDateSerializer(serializers.ModelSerializer):
     date_paper = PaperCategorySerializer(many=True, read_only=True)
+
     class Meta:
         model = PaperDateModel
         fields = ['date', 'date_paper']
+
+
+class ConnectedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConnectedModel
+        fields = ['first_name', 'last_name', 'hospital', 'specialty', 'email']

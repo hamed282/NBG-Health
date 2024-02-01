@@ -3,6 +3,6 @@ A/settings.py
 db.sqlite3
 
 static
-gallery/migrations
-home/migrations
-news/migrations
+#gallery/migrations
+#home/migrations
+#news/migrations
